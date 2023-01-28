@@ -5,7 +5,8 @@ import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { NavbarComponent } from './utils/navbar/navbar.component';
-import { MatToolbarModule } from '@angular/material/toolbar'
+import { MatToolbarModule } from '@angular/material/toolbar';
+import { MatButtonModule } from '@angular/material/button'
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { HomepageComponent } from './component/homepage/homepage.component';
 import { SigninComponent } from './connection/signin/signin.component';
@@ -14,7 +15,9 @@ import { SignupComponent } from './connection/signup/signup.component';
 import { ReservationComponent } from './component/reservation/reservation.component';
 import { CooksComponent } from './component/cooks/cooks.component'; 
 import { AuthService } from './auth/auth.service';
-import { HttpClient, HttpClientModule } from '@angular/common/http';
+import { HttpClient, HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
+import { AuthInterceptor } from './auth/auth.interceptor';
+
 
 
 
@@ -27,7 +30,7 @@ import { HttpClient, HttpClientModule } from '@angular/common/http';
     SignoutComponent,
     SignupComponent,
     ReservationComponent,
-    CooksComponent  
+    CooksComponent
   ],
   imports: [
     BrowserModule,
@@ -36,9 +39,14 @@ import { HttpClient, HttpClientModule } from '@angular/common/http';
     MatToolbarModule,
     NgbModule,
     FormsModule,
-    HttpClientModule
+    HttpClientModule, 
+    MatButtonModule
   ],
-  providers: [AuthService, HttpClient],
+  providers: [AuthService, HttpClient, {
+    provide: HTTP_INTERCEPTORS,
+    useClass: AuthInterceptor,
+    multi: true
+  }],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

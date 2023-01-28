@@ -4,16 +4,10 @@
 
   button {
     margin-left: 20px;
-    float: left;
-  }
+  
+  }  
 
-  .left-buttons {
-    float: left;
-    background-color: pink;
+  .spacer {
+    flex: 1 1 auto;
   }
-
-  .right-buttons {
-    float: right;
-  }
-
 

@@ -17,8 +17,7 @@ export class SigninComponent implements OnInit {
   }
 
   login() {
-    this.auth.login(this.email, this.password)
-     
+    this.auth.login(this.email, this.password);
   }
 }
 
