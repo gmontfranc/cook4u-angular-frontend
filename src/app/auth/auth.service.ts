@@ -18,7 +18,7 @@ export class AuthService {
 
     const body = JSON.stringify({ email, password });
 
-    this.http.post<any>(this.BASE_AUTH_URL + 'login', body, httpOptions).subscribe( =>{
+    this.http.post<any>(this.BASE_AUTH_URL + 'login', body, httpOptions).subscribe({
       next:() => {
         console.log("#FR HEADERS: ")
         //this.cookieService.set('jwt', );

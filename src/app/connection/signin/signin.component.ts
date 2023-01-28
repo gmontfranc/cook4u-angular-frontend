@@ -7,24 +7,18 @@ import { Router } from '@angular/router';
   templateUrl: './signin.component.html',
   styleUrls: ['./signin.component.scss']
 })
-export class SigninComponent {
-  username: string = ""
+export class SigninComponent implements OnInit {
+  email: string = ""
   password: string = ""
 
-  constructor(private loginService: AuthService, private router: Router) { }
+  constructor(private auth: AuthService, private router: Router) { }
 
   ngOnInit() {
   }
 
   login() {
-    this.loginService.login(this.username, this.password)
-      .subscribe(
-        (data) => {
-          this.router.navigate(['/home']);
-        },
-        (error) => {
-          console.log(error);
-        });
+    this.auth.login(this.email, this.password)
+     
   }
 }
 
