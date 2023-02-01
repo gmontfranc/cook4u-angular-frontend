@@ -5,13 +5,15 @@ import { map } from 'rxjs/operators';
 import { CookieService } from 'ngx-cookie-service';
 import { Router } from '@angular/router';
 import { AuthResponse, isAuthResponse } from '../model/auth-response';
+import jwtDecode from 'jwt-decode';
+import { JwtHelperService } from '@auth0/angular-jwt';
 
 @Injectable()
 export class AuthService {
 
   private BASE_AUTH_URL = "/api/auth/";
 
-  constructor(private http: HttpClient, private cookieService: CookieService, private router: Router) { }
+  constructor(private http: HttpClient, private cookieService: CookieService, private router: Router, private jwtUtils: JwtHelperService) { }
 
   login(email: string, password: string) {
     const httpOptions = {
@@ -38,5 +40,29 @@ export class AuthService {
 
   isLoggedIn(): boolean {
     return localStorage.getItem('jwt') != null;
+  }
+
+  isCook(): boolean {
+    if(localStorage.getItem('jwt') !=null) {
+      let decodedToken = this.jwtUtils.decodeToken(String(localStorage.getItem('jwt')));
+      return decodedToken['role'] == "Cook";
+    }
+    return false;
+  }
+
+  isUser(): boolean {
+    if(localStorage.getItem('jwt') !=null) {
+      let decodedToken = this.jwtUtils.decodeToken(String(localStorage.getItem('jwt')));
+      return decodedToken['role'] == "User";
+    }
+    return false;
+  }
+
+  isAdmin(): boolean {
+    if(localStorage.getItem('jwt') !=null) {
+      let decodedToken = this.jwtUtils.decodeToken(String(localStorage.getItem('jwt')));
+      return decodedToken['role'] == "Admin";
+    }
+    return false;
   }
 }

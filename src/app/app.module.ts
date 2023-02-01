@@ -20,6 +20,9 @@ import { AuthInterceptor } from './auth/auth.interceptor';
 import { AllCooksCarouselComponent } from 'src/app/component/all-cooks-carousel/all-cooks-carousel.component';
 import { SlickCarouselModule } from 'ngx-slick-carousel';
 import { SlickCarouselComponent } from 'ngx-slick-carousel';
+import { JwtHelperService, JWT_OPTIONS  } from '@auth0/angular-jwt';
+import { CookReservationComponent } from './component/reservations/cook-reservation/cook-reservation.component';
+import { UserReservationComponent } from './component/reservations/user-reservation/user-reservation.component';
 
 
 
@@ -34,7 +37,9 @@ import { SlickCarouselComponent } from 'ngx-slick-carousel';
     SignupComponent,
     ReservationComponent,
     CooksComponent,
-    AllCooksCarouselComponent    
+    AllCooksCarouselComponent,
+    CookReservationComponent,
+    UserReservationComponent  
   ],
   imports: [
     BrowserModule,
@@ -51,7 +56,9 @@ import { SlickCarouselComponent } from 'ngx-slick-carousel';
     provide: HTTP_INTERCEPTORS,
     useClass: AuthInterceptor,
     multi: true
-  }],
+  },
+  { provide: JWT_OPTIONS, useValue: JWT_OPTIONS },
+  JwtHelperService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
