@@ -3,12 +3,15 @@ import { RouterModule, Routes } from '@angular/router';
 import { CooksComponent } from './component/cooks/cooks.component';
 import { HomepageComponent } from './component/homepage/homepage.component';
 import { ReservationComponent } from './component/reservation/reservation.component';
+import { CookReservationComponent } from './component/reservations/cook-reservation/cook-reservation.component';
+import { UserReservationComponent } from './component/reservations/user-reservation/user-reservation.component';
 import { SigninComponent } from './connection/signin/signin.component';
 import { SignoutComponent } from './connection/signout/signout.component';
 
 const routes: Routes = [
   { path: '', pathMatch: 'full', component: HomepageComponent },
-  { path: 'home', pathMatch: 'full', component: HomepageComponent },
+  { path: 'cook/reservations', component: CookReservationComponent },
+  { path: 'user/reservations', component: UserReservationComponent },
   { path: 'reservation', component: ReservationComponent },
   { path: 'cooks', component: CooksComponent },
   { path: 'signin', component: SigninComponent },

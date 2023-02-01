@@ -3,12 +3,12 @@
     <span>Cook4U</span>
     <button mat-button routerLink="home" >Accueil</button>
     <button *ngIf="this.auth.isUser()" routerLink="reservation" >Réserver</button>
-    <div *ngIf="this.auth.isCook(); then myReservationForCooks else myReservationForUsers"></div>
+    <div *ngIf="this.auth.isCook()then myReservationForCooks else myReservationForUsers"></div>
     <ng-template #myReservationForCooks>
-      <button  mat-stroked-button routerLink="cooks/reservations" >Mes réservations</button>
+      <button *ngIf="this.auth.isLoggedIn()" mat-stroked-button routerLink="cook/reservations" >Mes réservations</button>
     </ng-template>
     <ng-template #myReservationForUsers>
-      <button mat-stroked-button routerLink="user/reservations" >Mes réservations</button>
+      <button *ngIf="this.auth.isLoggedIn()" mat-stroked-button routerLink="user/reservations" >Mes réservations</button>
     </ng-template>
 
   
