@@ -8,6 +8,7 @@ import { SignoutComponent } from './connection/signout/signout.component';
 
 const routes: Routes = [
   { path: '', pathMatch: 'full', component: HomepageComponent },
+  { path: 'home', pathMatch: 'full', component: HomepageComponent },
   { path: 'reservation', component: ReservationComponent },
   { path: 'cooks', component: CooksComponent },
   { path: 'signin', component: SigninComponent },

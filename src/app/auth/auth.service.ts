@@ -20,15 +20,12 @@ export class AuthService {
 
     const body = JSON.stringify({ email, password });
 
-    this.http.post(this.BASE_AUTH_URL + 'login', body, httpOptions).subscribe({
+    this.http.post<AuthResponse>(this.BASE_AUTH_URL + 'login', body, httpOptions).subscribe({
       next:(data) => { 
-        if(isAuthResponse(data)) {
           localStorage.setItem('jwt', data.token);
-          this.router.navigateByUrl('/home');
-        }         
+          this.router.navigateByUrl('/home');    
       },
       error: () => {
-        console.log("fine");
         
       }
     });      
