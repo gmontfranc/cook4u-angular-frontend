@@ -13,10 +13,8 @@ export class AuthInterceptor implements HttpInterceptor {
   constructor() {}
 
   intercept(request: HttpRequest<unknown>, next: HttpHandler): Observable<HttpEvent<unknown>> {
-    console.log("#FR");
     
     if(this.isLoggedIn()) {
-      console.log("#FR IN IF");
       return next.handle(request.clone({
         headers: request.headers.set('Authorization','Bearer '+localStorage.getItem('jwt'))
       }));
