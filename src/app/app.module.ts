@@ -17,6 +17,9 @@ import { CooksComponent } from './component/cooks/cooks.component';
 import { AuthService } from './auth/auth.service';
 import { HttpClient, HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { AuthInterceptor } from './auth/auth.interceptor';
+import { AllCooksCarouselComponent } from 'src/app/component/all-cooks-carousel/all-cooks-carousel.component';
+import { SlickCarouselModule } from 'ngx-slick-carousel';
+import { SlickCarouselComponent } from 'ngx-slick-carousel';
 
 
 
@@ -30,7 +33,8 @@ import { AuthInterceptor } from './auth/auth.interceptor';
     SignoutComponent,
     SignupComponent,
     ReservationComponent,
-    CooksComponent
+    CooksComponent,
+    AllCooksCarouselComponent    
   ],
   imports: [
     BrowserModule,
@@ -40,7 +44,8 @@ import { AuthInterceptor } from './auth/auth.interceptor';
     NgbModule,
     FormsModule,
     HttpClientModule, 
-    MatButtonModule
+    MatButtonModule,
+    SlickCarouselModule
   ],
   providers: [AuthService, HttpClient, {
     provide: HTTP_INTERCEPTORS,

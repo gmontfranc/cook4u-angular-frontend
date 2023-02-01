@@ -1,0 +1,22 @@
+<div id="carouselExampleIndicators" class="carousel slide" data-ride="carousel">
+    <ol class="carousel-indicators">
+      <li *ngFor="let item of cooks; let i = index" [attr.data-slide-to]="i" [ngClass]="{ 'active': i === 0 }"></li>
+    </ol>
+    <div class="carousel-inner">
+      <div *ngFor="let item of cooks; let i = index" [ngClass]="{ 'carousel-item': true, 'active': i === 0 }">
+        <img src="../../../assets/static/images/cooking.png" class="" alt="...">
+        <div class="carousel-caption d-none d-md-block">
+          <h1>{{ item.name }}</h1>
+          <p>{{ item.description }}</p>
+        </div>
+      </div>
+    </div>
+    <a class="carousel-control-prev" href="#carouselExampleIndicators" role="button" data-slide="prev">
+      <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+      <span class="visually-hidden">Previous</span>
+    </a>
+    <a class="carousel-control-next" href="#carouselExampleIndicators" role="button" data-slide="next">
+      <span class="carousel-control-next-icon" aria-hidden="true"></span>
+      <span class="visually-hidden">Next</span>
+    </a>
+  </div>
