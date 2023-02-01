@@ -2,8 +2,18 @@
   <mat-toolbar-row>
     <span>Cook4U</span>
     <button mat-button routerLink="home" >Accueil</button>
-    <button mat-button routerLink="reservation" >Réserver</button>
-    <button mat-button routerLink="cooks" >Les chefs</button>
+    <button *ngIf="this.auth.isUser()" routerLink="reservation" >Réserver</button>
+    <div *ngIf="this.auth.isCook(); then myReservationForCooks else myReservationForUsers"></div>
+    <ng-template #myReservationForCooks>
+      <button  mat-stroked-button routerLink="cooks/reservations" >Mes réservations</button>
+    </ng-template>
+    <ng-template #myReservationForUsers>
+      <button mat-stroked-button routerLink="user/reservations" >Mes réservations</button>
+    </ng-template>
+
+  
+    <button *ngIf="this.auth.isUser()" mat-button routerLink="cooks" >Les chefs</button>
+    <button *ngIf="this.auth.isCook()" mat-button routerLink="my-menus" >Mes menus</button>
     <span class="spacer"></span>   
     <div *ngIf="this.auth.isLoggedIn(); then logoutButton else loginButton"></div>
     <ng-template #loginButton>
