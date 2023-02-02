@@ -2,10 +2,31 @@
     color: red;
 }
 
+h5 {
+    font-weight: bold;
+    text-align: center;
+    
+}
+
 h1 {
-    color: red;
+
+    padding-top: 120px;
 }
 
 p {
-    color: red;
+   
+}
+
+.carousel-card {
+    display:flex;
+    flex-wrap: nowrap;
+    width: 50%;
+    padding-top: 150px;
+    margin: 0 auto;    
+}
+
+
+.cook-icon {
+    width: 10%;
+    padding-right: 15px;
 }
