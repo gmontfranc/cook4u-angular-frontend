@@ -14,6 +14,7 @@ const routes: Routes = [
   { path: 'user/reservations', component: UserReservationComponent },
   { path: 'reservation', component: ReservationComponent },
   { path: 'cooks', component: CooksComponent },
+  { path: 'cook/:id/reservation', component: ReservationComponent },
   { path: 'signin', component: SigninComponent },
   { path: 'logout', component: SignoutComponent },
   { path: '**', redirectTo: '' }];

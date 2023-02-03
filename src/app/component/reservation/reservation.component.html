@@ -1,1 +1,50 @@
-<p>reservation works!</p>
+<div class="form-container">
+    <header class="header">
+        <h1 class="title">
+            Reservation
+        </h1>
+    </header>
+    <form [formGroup]="form" (ngSubmit)="submitForm()" class="form">
+        <mat-form-field>
+            <mat-label>Cook</mat-label>
+            <mat-select formControlName="cook">
+                <mat-option *ngFor="let cook of cooks" [value]="cook.name">
+                    {{cook.name}}
+                </mat-option>
+            </mat-select>
+        </mat-form-field>
+
+        <mat-form-field>
+            <mat-label>Menu</mat-label>
+            <mat-select placeholder="Menu" formControlName="menu">
+                <mat-option *ngFor="let menu of menus" [value]="menu.name">
+                    {{menu.name}}
+                </mat-option>
+            </mat-select>
+        </mat-form-field>
+
+        <mat-form-field>
+            <mat-label>Date</mat-label>
+            <input matInput [matDatepicker]="picker" formControlName="date">
+            <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+            <mat-datepicker #picker></mat-datepicker>
+        </mat-form-field>
+
+        <mat-form-field>
+            <mat-label>Address</mat-label>
+            <input matInput formControlName="address">
+        </mat-form-field>
+
+        <mat-form-field>
+            <mat-label>Phone number</mat-label>
+            <input matInput formControlName="phoneNumber">
+        </mat-form-field>
+
+        <mat-form-field>
+            <mat-label>Comments</mat-label>
+            <textarea matInput formControlName="comments"></textarea>
+        </mat-form-field>
+
+        <button mat-raised-button color="primary" [disabled]="form.invalid">Réserver</button>
+    </form>
+</div>
