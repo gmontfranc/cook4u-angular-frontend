@@ -1,14 +1,14 @@
   <div id="carouselExampleIndicators" #mycarouselControls class="carousel slide" data-bs-ride="carousel" data-bs-interval="2000">            
       <div>
-            <ul *ngFor="let pic of cooks;let i=index; first as isFirst">
+            <ul *ngFor="let cook of cooks;let i=index; first as isFirst">
                 <div [ngClass]="isFirst ? 'carousel-item active' : 'carousel-item' ">
                   <div class="carousel-card">
                     <img src="../../../assets/static/images/cooking.png" class="cook-icon" alt="...">
                     <div>
-                      <h5>{{pic.name}}</h5>
-                      <p>{{pic.description}}</p>
-                      <button class="reserve-button" routerLink="cook/{{pic.id}}/reservation" mat-stroked-button>Réserver</button>
-                      <button class="reserve-button" routerLink="cooks/all" mat-stroked-button>Voir tous</button>
+                      <h5>{{cook.name}}</h5>
+                      <p>{{cook.description}}</p>
+                      <button class="reserve-button" routerLink="cook/{{cook.id}}/reservation" mat-button>Réserver</button>
+                      <button class="reserve-button" routerLink="cooks/all" mat-button>Voir tous</button>
                     </div>                    
                 </div>   
               </div>                                  

@@ -2,13 +2,13 @@
   <mat-toolbar-row>
     <span>Cook4U</span>
     <button mat-button routerLink="home" >Accueil</button>
-    <button *ngIf="this.auth.isUser()" routerLink="reservation" >Réserver</button>
+    <button mat-button *ngIf="this.auth.isUser()" routerLink="reservation" >Réserver</button>
     <div *ngIf="this.auth.isCook()then myReservationForCooks else myReservationForUsers"></div>
     <ng-template #myReservationForCooks>
-      <button *ngIf="this.auth.isLoggedIn()" mat-stroked-button routerLink="cook/reservations" >Mes réservations</button>
+      <button *ngIf="this.auth.isLoggedIn()" mat-button routerLink="cook/reservations" >Mes réservations</button>
     </ng-template>
     <ng-template #myReservationForUsers>
-      <button *ngIf="this.auth.isLoggedIn()" mat-stroked-button routerLink="user/reservations" >Mes réservations</button>
+      <button *ngIf="this.auth.isLoggedIn()" mat-button routerLink="user/reservations" >Mes réservations</button>
     </ng-template>
 
   
@@ -17,10 +17,10 @@
     <span class="spacer"></span>   
     <div *ngIf="this.auth.isLoggedIn(); then logoutButton else loginButton"></div>
     <ng-template #loginButton>
-      <button  mat-stroked-button routerLink="signin" >Se connecter</button>
+      <button  mat-button routerLink="signin" >Se connecter</button>
     </ng-template>
     <ng-template #logoutButton>
-      <button mat-stroked-button routerLink="logout" >Se déconnecter</button>
+      <button mat-button routerLink="logout" >Se déconnecter</button>
     </ng-template>
     
   </mat-toolbar-row>
