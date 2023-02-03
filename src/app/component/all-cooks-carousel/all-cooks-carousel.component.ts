@@ -17,15 +17,9 @@ export class AllCooksCarouselComponent implements OnInit {
   
   ngOnInit() {
     this.cookService.getAllCooks().subscribe({
-      next: (data) => {
-        
-        this.cooks = data;
-          console.log("DATA: "+this.cooks[0].id);
-          
-        
+      next: (data) => {     
+        this.cooks = data.slice(1, 5);
       }
     });
-  }
-
- 
+  } 
 }
