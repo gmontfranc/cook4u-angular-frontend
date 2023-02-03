@@ -1,6 +1,8 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import {MatFormFieldModule} from '@angular/material/form-field'
+import { MatSelectChange } from '@angular/material/select';
+import { ActivatedRoute } from '@angular/router';
 import { User } from 'src/app/model/user';
 import { CookService } from 'src/app/service/cook-services/cook.service';
 
@@ -11,10 +13,13 @@ import { CookService } from 'src/app/service/cook-services/cook.service';
 })
 export class ReservationComponent implements OnInit {
 
-  constructor(private formHelper: FormBuilder, private cookService: CookService) {}
+  constructor(private formHelper: FormBuilder, private cookService: CookService, private subRoute: ActivatedRoute) {}
+
   form: FormGroup;
   cooks: User[];
   menus: any[];
+  selectedCook: User;
+  
 
   ngOnInit(): void  {
     this.form = this.formHelper.group({
@@ -30,21 +35,48 @@ export class ReservationComponent implements OnInit {
     this.cookService.getAllCooks().subscribe({
       next: (data) => {
         this.cooks = data;
-        console.log(JSON.stringify(this.cooks));
-        
-      }
-    });
+        this.subRoute.params.subscribe(params => {
+          console.log("Routing");
+          
+          let parmId: number = params['id']; 
+          let foundCook: User | undefined;
+          if(parmId != null) {
+            console.log("Searching: "+parmId+'\n'+JSON.stringify(this.cooks));
+            
+            foundCook = this.cooks.find((cook) => {
+              return cook.id == parmId;
+            });
+          }
+          if(foundCook != undefined) {
+            
+            this.selectedCook = foundCook;
+          }
+        });
 
-    this.cookService.getAllMenusForCooks(3).subscribe({
-      next: (data) => {
-        this.menus = data;
-        console.log(JSON.stringify(this.cooks));
-        
       }
-    });
+    });     
+
+    
+
   }
 
+  getMenusForCook(parm1: MatSelectChange): void
+ {
+  console.log("trigger");
+  
+  let cookId: number = parm1.value.id;  
+  this.cookService.getAllMenusForCooks(cookId).subscribe({
+    next: (data) => {
+      this.menus = data; 
+    }
+  });
+}
+  
+
+ 
   submitForm() {
 
   }
+
 }
+
