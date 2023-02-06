@@ -1,9 +1,25 @@
-<div>
-    <form>
-      <label>Email:</label>
-      <input type="text" [(ngModel)]="email" name="email">
-      <label>Password:</label>
-      <input type="password" [(ngModel)]="password" name="password">
-      <button (click)="login()">Login</button>
-    </form>
+<head>
+  <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+</head>
+<div class="form-container">
+  <header class="header">
+      <h1 class="title">
+          Se connecter
+      </h1>
+  </header>
+
+  <div>
+    <form [formGroup]="signin" (ngSubmit)="login()" class="form">
+      <mat-form-field>
+        <mat-label>Email:</mat-label>
+        <input matInput formControlName="email" placeholder="email" [(ngModel)]="email" name="email">
+        </mat-form-field>
+        <mat-form-field>
+        <label>Password:</label>
+        <input matInput placeholder="Password" [type]="hide ? 'password' : 'text'" formControlName="password" [(ngModel)]="password" name="password">
+        <mat-icon matSuffix (click)="hide = !hide">{{hide ? 'Show' : 'hide'}}</mat-icon>
+        </mat-form-field>
+        <button mat-raised-button color="primary" [disabled]="signin.invalid">Login</button>
+      </form>
+  </div>
 </div>
