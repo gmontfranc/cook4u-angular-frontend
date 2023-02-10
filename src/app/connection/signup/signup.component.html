@@ -1,27 +1,49 @@
-<form [formGroup]="signUpForm" (ngSubmit)="submitForm()">
-    <div>
-      <label>Email:</label>
-      <input type="email" formControlName="email" />
-    </div>
-    <div>
-      <label>First name:</label>
-      <input type="text" formControlName="firstname" />
-    </div>
-    <div>
-      <label>Last name:</label>
-      <input type="text" formControlName="lastname" />
-    </div>
-    <div>
-      <label>Password:</label>
-      <input type="password" formControlName="password" />
-    </div>
-    <div>
-      <label>Confirm password:</label>
-      <input type="password" formControlName="password2" />
-    </div>
-    <div>
-      <label>Age:</label>
-      <input type="number" formControlName="age" />
-    </div>
-    <button type="submit" [disabled]="signUpForm.invalid">Sign up</button>
-  </form>
+<head>
+  <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+</head>
+<div class="form-container">
+  <header class="header">
+      <h1 class="title">
+          S'enregistrer
+      </h1>
+  </header>
+
+  <form [formGroup]="signUpForm" (ngSubmit)="submitForm()" class="form">
+      <mat-form-field>
+        <mat-label>Email:</mat-label>
+        <input matInput  formControlName="email" />
+      </mat-form-field>
+
+      <mat-form-field>
+        <mat-label>Firstname:</mat-label>
+        <input matInput formControlName="firstname" />
+      </mat-form-field>
+
+      <mat-form-field>
+        <mat-label>Lastname:</mat-label>
+        <input matInput formControlName="lastname" />
+      </mat-form-field>
+
+      <mat-form-field>
+        <mat-label>Age:</mat-label>
+        <input matInput type="number" formControlName="age" />
+      </mat-form-field>
+
+      <mat-form-field>
+        <mat-label>Password:</mat-label>
+        <input matInput type="password" formControlName="password" />
+      </mat-form-field>
+
+      <mat-form-field>
+        <mat-label>Confirm password:</mat-label>
+        <input matInput type="password" formControlName="password2" />
+        <mat-error *ngIf="signUpForm.get('password2')?.invalid">
+         Les deux mots de pass doivent correspondre
+        </mat-error>
+      </mat-form-field>
+
+     
+
+      <button mat-raised-button color="primary" type="submit" [disabled]="signUpForm.invalid">Sign up</button>
+    </form>
+</div>

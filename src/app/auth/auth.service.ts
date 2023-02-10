@@ -54,9 +54,7 @@ export class AuthService {
     if(localStorage.getItem('jwt') !=null) {
       let decodedToken = this.jwtUtils.decodeToken(String(localStorage.getItem('jwt')));
       return decodedToken['role'] == "User";
-    }
-    console.log("HIII");
-    
+    }    
     return false;
   }
 
