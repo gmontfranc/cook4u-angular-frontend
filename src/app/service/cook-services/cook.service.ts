@@ -17,13 +17,17 @@ export class CookService {
 
   private PUBLIC_COOK_URL = "/api/public/cooks";
   private PROTECTED_MENU_URL = "/api/menu/cook/"
+  private PROTECTED_USER_URL = "/api/user/"
 
   getAllCooks(){
-    
     return this.http.get<User[]>(this.PUBLIC_COOK_URL, this.httpOptions);
   }
 
   getAllMenusForCooks(id: number) {
     return this.http.get<Menu[]>(`${this.PROTECTED_MENU_URL}${id}`);
+  }
+
+  findCookById(id: number) {
+    return this.http.get<User>(`${this.PROTECTED_USER_URL}${id}`);
   }
 }

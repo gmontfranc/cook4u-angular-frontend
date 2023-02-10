@@ -7,6 +7,7 @@ import { CookReservationComponent } from './component/reservations/cook-reservat
 import { UserReservationComponent } from './component/reservations/user-reservation/user-reservation.component';
 import { SigninComponent } from './connection/signin/signin.component';
 import { SignoutComponent } from './connection/signout/signout.component';
+import { SignupComponent } from './connection/signup/signup.component';
 
 const routes: Routes = [
   { path: '', pathMatch: 'full', component: HomepageComponent },
@@ -16,6 +17,7 @@ const routes: Routes = [
   { path: 'cooks', component: CooksComponent },
   { path: 'cook/:id/reservation', component: ReservationComponent },
   { path: 'signin', component: SigninComponent },
+  { path: 'signup', component: SignupComponent },
   { path: 'logout', component: SignoutComponent },
   { path: '**', redirectTo: '' }];
 

@@ -19,6 +19,7 @@ export class ReservationComponent implements OnInit {
   cooks: User[];
   menus: any[];
   selectedCook: User;
+  cookIdParm: number;
   
 
   ngOnInit(): void  {
@@ -33,38 +34,46 @@ export class ReservationComponent implements OnInit {
     });
 
     this.cookService.getAllCooks().subscribe({
-      next: (data) => {
+      next: (data) => {        
         this.cooks = data;
-        this.subRoute.params.subscribe(params => {
-          console.log("Routing");
-          
-          let parmId: number = params['id']; 
-          let foundCook: User | undefined;
-          if(parmId != null) {
-            console.log("Searching: "+parmId+'\n'+JSON.stringify(this.cooks));
+      }
+    }); 
+
+    this.subRoute.params.subscribe(params => {
+      this.cookIdParm = params['id']; 
+    });
+
+
+    if(this.cookIdParm != null) {
+      let foundCook: User | undefined;
+      let testSTR: String;
+      if(this.cookIdParm != null) {       
+        this.cookService.findCookById(this.cookIdParm).subscribe({          
+          next: (data) => {
+            console.log("#FR DATA: "+JSON.stringify(data));
             
-            foundCook = this.cooks.find((cook) => {
-              return cook.id == parmId;
-            });
-          }
-          if(foundCook != undefined) {
-            
-            this.selectedCook = foundCook;
+            this.selectedCook = data;
+            testSTR = "test";
           }
         });
-
-      }
-    });     
-
-    
+      }      
+      console.log("#FR cookfound: "+foundCook);
+      
+        if(foundCook != undefined) {
+          console.log("#FR COOK FOUND: "+JSON.stringify(foundCook));
+          
+          this.selectedCook = foundCook;
+        }
+    }   
 
   }
 
   getMenusForCook(parm1: MatSelectChange): void
- {
-  console.log("trigger");
-  
-  let cookId: number = parm1.value.id;  
+ {  
+  let cookId: number = parm1.value.id;
+  if(this.cookIdParm != null)
+    cookId = this.cookIdParm;
+
   this.cookService.getAllMenusForCooks(cookId).subscribe({
     next: (data) => {
       this.menus = data; 
