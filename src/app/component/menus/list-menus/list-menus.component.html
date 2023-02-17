@@ -1,0 +1,116 @@
+<div class="form-container">
+  <header class="header">
+    <h1 class="title">Mes Menus</h1>
+  </header>
+
+  <form class="form" *ngIf="isSingleMenu">
+    <button mat-raised-button color="primary" (click)="returnToTable()">
+      Retour au tableau
+    </button>
+    <mat-form-field>
+      <mat-label>Nom</mat-label>
+      <input
+        matInput
+        [value]="currentMenu.name"
+        disabled
+        style="color: black"
+      />
+    </mat-form-field>
+
+    <mat-form-field>
+      <mat-label>Description</mat-label>
+      <input
+        matInput
+        [value]="currentMenu.description"
+        disabled
+        style="color: black"
+      />
+    </mat-form-field>
+    <div class="row">
+      <div class="col">
+        <mat-label *ngIf="starters.length > 0">Entrées</mat-label>
+        <div *ngFor="let item of starters; let i = index">
+          <div style="border: 2px solid">
+            <span
+              ><b><u>Nom :</u></b> {{ item.name }},<br
+            /></span>
+            <span>
+              <b><u>Prix :</u></b> {{ item.price }}</span
+            >
+          </div>
+        </div>
+      </div>
+      <div class="col">
+        <mat-label *ngIf="mains.length > 0">Plats Principaux</mat-label>
+        <div *ngFor="let item of mains; let i = index">
+          <div>
+            <div style="border: 2px solid">
+              <span
+                ><b><u>Nom :</u></b> {{ item.name }},<br
+              /></span>
+              <span>
+                <b><u>Prix :</u></b> {{ item.price }}</span
+              >
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="col">
+        <mat-label *ngIf="desserts.length > 0">Desserts</mat-label>
+        <div *ngFor="let item of desserts; let i = index">
+          <div>
+            <div style="border: 2px solid">
+              <span
+                ><b><u>Nom :</u></b> {{ item.name }},<br
+              /></span>
+              <span>
+                <b><u>Prix :</u></b> {{ item.price }}</span
+              >
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </form>
+  <div class="reservations-container" *ngIf="!isSingleMenu">
+    <mat-form-field>
+      <mat-label>Filtre</mat-label>
+      <input
+        matInput
+        (keyup)="applyFilter($event)"
+        placeholder="Ex. ium"
+        #input
+      />
+    </mat-form-field>
+
+    <table mat-table [dataSource]="dataSource" class="mat-elevation-z8">
+      <!-- Position Column -->
+      <ng-container matColumnDef="name">
+        <th mat-header-cell *matHeaderCellDef>Nom du menu</th>
+        <td mat-cell *matCellDef="let element">{{ element.name }}</td>
+      </ng-container>
+
+      <!-- Name Column -->
+      <ng-container matColumnDef="description">
+        <th mat-header-cell *matHeaderCellDef>Description</th>
+        <td mat-cell *matCellDef="let element">
+          {{ element.description }}
+        </td>
+      </ng-container>
+
+      <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+      <tr
+        mat-row
+        (click)="goToMenu(row)"
+        *matRowDef="let row; columns: displayedColumns"
+      ></tr>
+
+      <!-- Row shown when there is no matching data. -->
+      <tr class="mat-row" *matNoDataRow>
+        <td class="mat-cell" colspan="4">
+          Aucun menu trouvés
+        </td>
+      </tr>
+    </table>
+  </div>
+</div>

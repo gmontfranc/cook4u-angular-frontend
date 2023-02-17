@@ -1,0 +1,42 @@
+<div class="form-container">
+  <header class="header">
+    <h1 class="title">Plat</h1>
+  </header>
+  <form [formGroup]="form" (ngSubmit)="submitForm()" class="form">
+    <mat-form-field>
+      <mat-label>Nom du plat</mat-label>
+      <input matInput formControlName="name" />
+    </mat-form-field>
+
+    <mat-form-field>
+      <mat-label>Description</mat-label>
+      <input matInput formControlName="description" />
+    </mat-form-field>
+
+    <mat-form-field>
+      <mat-label>Prix</mat-label>
+      <input type="number" min=0 matInput formControlName="price" />
+    </mat-form-field>
+
+    <mat-form-field>
+      <mat-label>Type de plat</mat-label>
+      <mat-select formControlName="type" [(ngModel)]="selectedType">
+        <mat-option *ngFor="let type of dishTypes" [value]="type">
+          {{ type }}
+        </mat-option>
+      </mat-select>
+    </mat-form-field>
+    <button mat-raised-button color="primary" [disabled]="form.invalid" *ngIf="!isLoading">
+      Créer Plat
+    </button>
+    <div class="loading-result" *ngIf="isLoading">
+        <mat-spinner style="margin: 0 auto"></mat-spinner>
+    </div>
+    <div class="alert alert-success" *ngIf="successMessage">
+        {{ successMessage }}
+      </div>
+      <div class=" alert alert-danger" *ngIf="failureMessage">
+        {{ failureMessage }}
+      </div>
+  </form>
+</div>

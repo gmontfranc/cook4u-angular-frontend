@@ -16,7 +16,7 @@
 
         <mat-form-field>
             <mat-label>Menu</mat-label>
-            <mat-select placeholder="Menu" formControlName="menu">
+            <mat-select placeholder="Menu" formControlName="menu" [(ngModel)]="selectedMenu" (selectionChange)="getDishesForMenu($event)">
                 <mat-option *ngFor="let menu of menus" [value]="menu">
                     {{menu.name}}
                 </mat-option>
@@ -25,9 +25,13 @@
 
         <mat-form-field>
             <mat-label>Date</mat-label>
-            <input matInput [matDatepicker]="picker" formControlName="date">
+            <input matInput [min]="minDate" [matDatepicker]="picker" formControlName="date" [matDatepickerFilter]="cookDateFilter">
             <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
             <mat-datepicker #picker></mat-datepicker>
+        </mat-form-field>
+        <mat-form-field>
+            <mat-label>Nombre de personnes</mat-label>
+            <input matInput formControlName="personsNumber" type="number" min="1" max="5" (change)="resetDishes()">
         </mat-form-field>
 
         <mat-form-field>
@@ -45,6 +49,101 @@
             <textarea matInput formControlName="comments"></textarea>
         </mat-form-field>
 
-        <button mat-raised-button color="primary" [disabled]="form.invalid">Réserver</button>
+        <!--<div class="row">
+            <div class="col" >
+                    <mat-label *ngIf="entries.length > 0">Entrées</mat-label>
+                    <div formArrayName="entries" *ngFor="let item of entries;let i = index">
+                        <div [formGroupName]="i">
+                            <mat-form-field>
+                                <mat-label>Entrée : </mat-label>
+                                <input  matInput [formControlName]="entries[i]" type="number" min="0">
+                            </mat-form-field>
+                        </div>
+                        
+                    </div>
+            </div>
+            <div class="col" >
+                <mat-label *ngIf="mains.length > 0">Plats Principales</mat-label>
+                <div formArrayName="mainDishes" *ngFor="let item of mains;let i = index">
+                    <div [formGroupName]="i">
+                        <mat-form-field>
+                            <mat-label>Plat : </mat-label>
+                            <input  matInput [formControlName]="mains[i]" type="number" min="0">
+                        </mat-form-field>
+                    </div>
+                    
+                </div>
+            </div>   
+            <div class="col" >
+                <mat-label *ngIf="deserts.length > 0">Desserts</mat-label>
+                <div formArrayName="deserts" *ngFor="let item of deserts;let i = index">
+                    <div [formGroupName]="i">
+                        <mat-form-field>
+                            <mat-label>Dessert : </mat-label>
+                            <input  matInput [formControlName]="deserts[i]" type="number" min="0">
+                        </mat-form-field>
+                    </div>
+                    
+                </div>
+            </div>   
+        </div>-->
+
+        <div class="row">
+            <div class="col" >
+                    <mat-label *ngIf="starters.length > 0">Entrées</mat-label>
+                    <div formArrayName="entries" *ngFor="let item of starters;let i = index">
+                        <div [formGroupName]="i">
+                            <mat-form-field>
+                                <mat-label>{{starters[i].name}} : </mat-label>
+                                <input  matInput [formControlName]="starters[i].name" type="number" min="0" (change)="checkMaxAvailable('Starter')">
+                            </mat-form-field>
+                        </div>
+                        
+                    </div>
+                    <div class="alert alert-danger" [hidden]="!starterError">
+                        {{ starterError }}
+                      </div>
+            </div>
+            <div class="col" >
+                <mat-label *ngIf="mainD.length > 0">Plats Principales</mat-label>
+                <div formArrayName="mainDishes" *ngFor="let item of mainD;let i = index">
+                    <div [formGroupName]="i">
+                        <mat-form-field>
+                            <mat-label>{{mainD[i].name}} : </mat-label>
+                            <input  matInput [formControlName]="mainD[i].name" type="number" min="0" (change)="checkMaxAvailable('Main')">
+                        </mat-form-field>
+                    </div>                  
+                </div>
+                <div class="alert alert-danger" [hidden]="!mainError">
+                    {{ mainError }}
+                  </div>
+            </div>   
+            <div class="col" >
+                <mat-label *ngIf="desserts.length > 0">Desserts</mat-label>
+                <div formArrayName="deserts" *ngFor="let item of desserts;let i = index">
+                    <div [formGroupName]="i">
+                        <mat-form-field>
+                            <mat-label>{{desserts[i].name}} : </mat-label>
+                            <input  matInput [formControlName]="desserts[i].name" type="number" min="0" (change)="checkMaxAvailable('Dessert')">
+                        </mat-form-field>
+                    </div>
+                    
+                </div>
+                <div class="alert alert-danger" [hidden]="!dessertError">
+                    {{ dessertError }}
+                  </div>
+            </div>   
+        </div>
+        <button mat-raised-button color="primary" [disabled]="form.invalid || disableSubmit" *ngIf="!isReservLoading">Réserver</button>
+        <div class="loading-result" *ngIf="isReservLoading">
+            <mat-spinner style="margin: 0 auto"></mat-spinner>
+        </div>
+        <div class="alert alert-success" *ngIf="successMessage">
+            {{ successMessage }}
+          </div>
+          <div class="alert alert-danger" *ngIf="failureMessage">
+            {{ failureMessage }}
+          </div>
+        
     </form>
 </div>

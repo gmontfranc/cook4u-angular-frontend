@@ -1,36 +1,62 @@
-.carousel-control-next-icon {
-    color: red;
-}
+// .carousel-control-next-icon {
+//     color: red;
+// }
 
-h5 {
-    font-weight: bold;
-    text-align: center;
+// h5 {
+//     font-weight: bold;
+//     text-align: center;
     
-}
+// }
 
-h1 {
+// h1 {
 
-    padding-top: 120px;
-}
+//     padding-top: 120px;
+// }
 
-p {
+// p {
    
-}
+// }
 
-.carousel-card {
-    display:flex;
-    flex-wrap: nowrap;
-    width: 50%;
-    padding-top: 150px;
-    margin: 0 auto;    
-}
+// .carousel-card {
+//     display:flex;
+//     flex-wrap: nowrap;
+//     width: 50%;
+//     padding-top: 150px;
+//     margin: 0 auto;    
+// }
 
 
-.cook-icon {
-    width: 10%;
-    padding-right: 15px;
-}
+// .cook-icon {
+//     width: 10%;
+//     padding-right: 15px;
+// }
 
-.reserve-button {
+// .reserve-button {
     
+// }
+
+.carousel-container {
+    background-color: grey;
 }
+ngb-carousel {
+    margin: 0 5%;
+    .picsum-img-wrapper > img {
+        //position: absolute;
+        padding: 0 32%;
+        
+    }
+
+    .carousel-control-next-icon, .carousel-control-prev-icon {
+        background: black;
+        width: 5rem;
+        height: 5rem;
+    }
+    
+    .carousel-indicators {
+        background-color: black !important;
+        width: 40px;
+        height: 6px;
+    }
+
+} 
+

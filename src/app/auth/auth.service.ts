@@ -11,7 +11,7 @@ import { JwtHelperService } from '@auth0/angular-jwt';
 @Injectable()
 export class AuthService {
 
-  private BASE_AUTH_URL = "/api/auth/";
+  private BASE_AUTH_URL = "http://localhost:8080/api/auth/";
 
   constructor(private http: HttpClient, private cookieService: CookieService, private router: Router, private jwtUtils: JwtHelperService) { }
 
@@ -22,15 +22,8 @@ export class AuthService {
 
     const body = JSON.stringify({ email, password });
 
-    this.http.post<AuthResponse>(this.BASE_AUTH_URL + 'login', body, httpOptions).subscribe({
-      next:(data) => { 
-          localStorage.setItem('jwt', data.token);
-          this.router.navigateByUrl('/home');    
-      },
-      error: () => {
-        
-      }
-    });      
+    console.log(this.BASE_AUTH_URL);
+    return this.http.post<AuthResponse>(this.BASE_AUTH_URL + 'login', body, httpOptions);      
   }
 
   logout() {
@@ -45,7 +38,7 @@ export class AuthService {
   isCook(): boolean {
     if(localStorage.getItem('jwt') !=null) {
       let decodedToken = this.jwtUtils.decodeToken(String(localStorage.getItem('jwt')));
-      return decodedToken['role'] == "Cook";
+      return decodedToken['role'] === "Cook";
     }
     return false;
   }
@@ -53,7 +46,7 @@ export class AuthService {
   isUser(): boolean {
     if(localStorage.getItem('jwt') !=null) {
       let decodedToken = this.jwtUtils.decodeToken(String(localStorage.getItem('jwt')));
-      return decodedToken['role'] == "User";
+      return decodedToken['role'] === "User";
     }    
     return false;
   }
@@ -61,7 +54,7 @@ export class AuthService {
   isAdmin(): boolean {
     if(localStorage.getItem('jwt') !=null) {
       let decodedToken = this.jwtUtils.decodeToken(String(localStorage.getItem('jwt')));
-      return decodedToken['role'] == "Admin";
+      return decodedToken['role'] === "Admin";
     }
     return false;
   }

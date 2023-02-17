@@ -13,7 +13,9 @@
 
   
     <button *ngIf="this.auth.isUser()" mat-button routerLink="cooks" >Les chefs</button>
-    <button *ngIf="this.auth.isCook()" mat-button routerLink="my-menus" >Mes menus</button>
+    <button *ngIf="this.auth.isCook()" mat-button routerLink="menus" >Mes menus</button>
+    <button *ngIf="this.auth.isCook()" mat-button routerLink="create-menu" >Créer un menu</button>
+    <button *ngIf="this.auth.isCook()" mat-button routerLink="create-dish" >Créer un plat</button>
     <span class="spacer"></span>   
     <div *ngIf="this.auth.isLoggedIn(); then logoutButton else loginButton"></div>
     <ng-template #loginButton>

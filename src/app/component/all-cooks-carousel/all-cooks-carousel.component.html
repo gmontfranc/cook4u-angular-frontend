@@ -1,17 +1,71 @@
-  <div id="carouselExampleIndicators" #mycarouselControls class="carousel slide" data-bs-ride="carousel" data-bs-interval="2000">            
-      <div>
-            <ul *ngFor="let cook of cooks;let i=index; first as isFirst">
-                <div [ngClass]="isFirst ? 'carousel-item active' : 'carousel-item' ">
-                  <div class="carousel-card">
-                    <img src="../../../assets/static/images/cooking.png" class="cook-icon" alt="...">
-                    <div>
-                      <h5>{{cook.name}}</h5>
-                      <p>{{cook.description}}</p>
-                      <button class="reserve-button" routerLink="cook/{{cook.id}}/reservation" mat-button>Réserver</button>
-                      <button class="reserve-button" routerLink="cooks/all" mat-button>Voir tous</button>
-                    </div>                    
-                </div>   
-              </div>                                  
-            </ul>
+<!-- <div
+  id="carouselExampleIndicators"
+  #mycarouselControls
+  class="carousel slide"
+  data-bs-ride="carousel"
+  data-bs-interval="2000"
+>
+  <div>
+    <ul *ngFor="let cook of cooks; let i = index; first as isFirst">
+      <div [ngClass]="isFirst ? 'carousel-item active' : 'carousel-item'">
+        <div class="carousel-card">
+          <img
+            src="../../../assets/static/images/cooking.png"
+            class="cook-icon"
+            alt="..."
+          />
+          <div>
+            <h5>{{ cook.name }}</h5>
+            <p>{{ cook.description }}</p>
+            <button
+              class="reserve-button"
+              routerLink="cook/{{ cook.id }}/reservation"
+              mat-button
+            >
+              Réserver
+            </button>
+            <button class="reserve-button" routerLink="cooks/all" mat-button>
+              Voir tous
+            </button>
           </div>
+        </div>
+      </div>
+    </ul>
+  </div>
+</div> -->
+<div class="container-cook" style="margin: 15% 20%;" *ngIf="this.auth.isCook()">
+  <p style="font-size: 60px; text-align: center;">Bienvenue</p>
 </div>
+<div class="carousel-container" *ngIf="!this.auth.isCook()">
+  <ngb-carousel *ngIf="cooks" [showNavigationArrows]="true"
+[showNavigationIndicators]="true">
+  <ng-template ngbSlide *ngFor="let cook of cooks">
+    <div class="picsum-img-wrapper">
+      <img
+        src="../../../assets/static/images/cooking.png"
+        class="cook-icon"
+        alt="..."
+      />
+    </div>
+    <div class="carousel-caption" style="left: 68%;">
+      <h3>{{ cook.name }}</h3>
+      <h3>{{ cook.email }}</h3>
+      <p>{{ cook.description }}</p>
+      <!--<button
+        class="reserve-button"
+        (click)="goToReservation(cook.id)"
+        mat-raised-button
+        color="primary"
+        style="margin-right: 10px"
+      >
+        Réserver
+      </button>
+      <button class="reserve-button" mat-raised-button color="primary" routerLink="cooks/all" mat-button>
+        Voir tous
+      </button>-->
+    </div>
+  </ng-template>
+  
+</ngb-carousel>
+</div>
+

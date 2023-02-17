@@ -12,7 +12,8 @@ import {MatSelectModule} from '@angular/material/select';
 import {MatInputModule} from '@angular/material/input';
 import {MatDatepickerModule} from '@angular/material/datepicker';
 import { MatNativeDateModule } from '@angular/material/core';
-import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
+import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
+import { NgbCarouselConfig, NgbCarouselModule, NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { HomepageComponent } from './component/homepage/homepage.component';
 import { SigninComponent } from './connection/signin/signin.component';
 import { SignoutComponent } from './connection/signout/signout.component';
@@ -26,7 +27,11 @@ import { AllCooksCarouselComponent } from 'src/app/component/all-cooks-carousel/
 import { JwtHelperService, JWT_OPTIONS  } from '@auth0/angular-jwt';
 import { CookReservationComponent } from './component/reservations/cook-reservation/cook-reservation.component';
 import { UserReservationComponent } from './component/reservations/user-reservation/user-reservation.component';
-
+import {MatTableModule} from '@angular/material/table';
+import { CreateMenuComponent } from './component/menus/create-menu/create-menu.component';
+import { ListMenusComponent } from './component/menus/list-menus/list-menus.component';
+import { CreateDishComponent } from './component/dishes/create-dish/create-dish.component';
+import { RouterModule } from '@angular/router';
 
 
 
@@ -42,7 +47,10 @@ import { UserReservationComponent } from './component/reservations/user-reservat
     CooksComponent,
     AllCooksCarouselComponent,
     CookReservationComponent,
-    UserReservationComponent  
+    UserReservationComponent,
+    CreateMenuComponent,
+    ListMenusComponent,
+    CreateDishComponent  
   ],
   imports: [
     BrowserModule,
@@ -54,14 +62,18 @@ import { UserReservationComponent } from './component/reservations/user-reservat
     HttpClientModule, 
     MatButtonModule,
     FormsModule,
+    RouterModule,
     ReactiveFormsModule,
     MatSelectModule,
     MatDatepickerModule,
     MatFormFieldModule,
     MatInputModule,
-    MatNativeDateModule
+    MatNativeDateModule,
+    MatTableModule,
+    MatProgressSpinnerModule,
+    NgbCarouselModule
   ],
-  providers: [AuthService, HttpClient, {
+  providers: [NgbCarouselConfig, AuthService, HttpClient, {
     provide: HTTP_INTERCEPTORS,
     useClass: AuthInterceptor,
     multi: true

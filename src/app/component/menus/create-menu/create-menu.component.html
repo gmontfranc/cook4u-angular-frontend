@@ -1,0 +1,173 @@
+<div class="form-container">
+  <header class="header">
+    <h1 class="title">Menu</h1>
+  </header>
+  <form [formGroup]="form" (ngSubmit)="submitForm()" class="form">
+    <mat-form-field>
+      <mat-label>Nom du menu</mat-label>
+      <input matInput formControlName="name" />
+    </mat-form-field>
+
+    <mat-form-field>
+      <mat-label>Description</mat-label>
+      <input matInput formControlName="description" />
+    </mat-form-field>
+    <div class="row">
+      <h3>Les Entrées</h3>
+      <div class="col">
+        <mat-form-field>
+          <mat-label>Première Entree</mat-label>
+          <mat-select
+            formControlName="starterOne"
+            [(ngModel)]="selectedStarterOne"
+            (selectionChange)="getFilteredDishes($event)"
+          >
+            <mat-option *ngFor="let starter of starters" [value]="starter">
+              {{ starter.name }}
+            </mat-option>
+          </mat-select>
+        </mat-form-field>
+      </div>
+      <div class="col">
+        <mat-form-field>
+          <mat-label>Deuxième Entree</mat-label>
+          <mat-select
+            formControlName="starterTwo"
+            [(ngModel)]="selectedStarterTwo"
+            (selectionChange)="getFilteredDishes($event)"
+          >
+            <mat-option *ngFor="let starter of starters" [value]="starter">
+              {{ starter.name }}
+            </mat-option>
+          </mat-select>
+        </mat-form-field>
+      </div>
+      <div class="col">
+        <mat-form-field>
+          <mat-label>Troisième Entree</mat-label>
+          <mat-select
+            formControlName="starterThree"
+            [(ngModel)]="selectedStarterThree"
+            (selectionChange)="getFilteredDishes($event)"
+          >
+            <mat-option *ngFor="let starter of starters" [value]="starter">
+              {{ starter.name }}
+            </mat-option>
+          </mat-select>
+        </mat-form-field>
+      </div>
+    </div>
+    <div class="row alert alert-danger" [hidden]="!starterError">
+      {{ starterError }}
+    </div>
+
+    <div class="row">
+      <h3>Les Plats principales</h3>
+      <div class="col">
+        <mat-form-field>
+          <mat-label>Premier Plat Principal</mat-label>
+          <mat-select
+            formControlName="mainOne"
+            (selectionChange)="getFilteredDishes($event)"
+          >
+            <mat-option *ngFor="let main of mains" [value]="main">
+              {{ main.name }}
+            </mat-option>
+          </mat-select>
+        </mat-form-field>
+      </div>
+      <div class="col">
+        <mat-form-field>
+          <mat-label>Deuxième Plat Principal</mat-label>
+          <mat-select
+            formControlName="mainTwo"
+            (selectionChange)="getFilteredDishes($event)"
+          >
+            <mat-option *ngFor="let main of mains" [value]="main">
+              {{ main.name }}
+            </mat-option>
+          </mat-select>
+        </mat-form-field>
+      </div>
+      <div class="col">
+        <mat-form-field>
+          <mat-label>Troisième Plat Principal</mat-label>
+          <mat-select
+            formControlName="mainThree"
+            (selectionChange)="getFilteredDishes($event)"
+          >
+            <mat-option *ngFor="let main of mains" [value]="main">
+              {{ main.name }}
+            </mat-option>
+          </mat-select>
+        </mat-form-field>
+      </div>
+    </div>
+    <div class="row alert alert-danger" [hidden]="!mainError">
+      {{ mainError }}
+    </div>
+
+    <div class="row">
+      <h3>Les Desserts</h3>
+      <div class="col">
+        <mat-form-field>
+          <mat-label>Premier Dessert</mat-label>
+          <mat-select
+            formControlName="dessertOne"
+            (selectionChange)="getFilteredDishes($event)"
+          >
+            <mat-option *ngFor="let dessert of desserts" [value]="dessert">
+              {{ dessert.name }}
+            </mat-option>
+          </mat-select>
+        </mat-form-field>
+      </div>
+      <div class="col">
+        <mat-form-field>
+          <mat-label>Deuxième Dessert</mat-label>
+          <mat-select
+          formControlName="dessertTwo"
+          (selectionChange)="getFilteredDishes($event)"
+        >
+          <mat-option *ngFor="let dessert of desserts" [value]="dessert">
+            {{ dessert.name }}
+          </mat-option>
+        </mat-select>
+        </mat-form-field>
+      </div>
+      <div class="col">
+        <mat-form-field>
+          <mat-label>Troisième Dessert</mat-label>
+          <mat-select
+          formControlName="dessertThree"
+          (selectionChange)="getFilteredDishes($event)"
+        >
+          <mat-option *ngFor="let dessert of desserts" [value]="dessert">
+            {{ dessert.name }}
+          </mat-option>
+        </mat-select>
+        </mat-form-field>
+      </div>
+    </div>
+    <div class="row alert alert-danger" [hidden]="!dessertError">
+      {{ dessertError }}
+    </div>
+    <button
+      mat-raised-button
+      color="primary"
+      [disabled]="form.invalid || disableSubmit"
+      *ngIf="!isLoading"
+    >
+      Créer Menu
+    </button>
+    <div class="loading-result" *ngIf="isLoading">
+        <mat-spinner style="margin: 0 auto"></mat-spinner>
+    </div>
+    <div class="alert alert-success" *ngIf="successMessage">
+        {{ successMessage }}
+      </div>
+      <div class=" alert alert-danger" *ngIf="failureMessage">
+        {{ failureMessage }}
+      </div>
+  </form>
+</div>
