@@ -14,6 +14,8 @@ export class SigninComponent implements OnInit {
   signin: FormGroup;
   hide = true;
 
+  error = "";
+
   constructor(private auth: AuthService, private router: Router, private formHelper: FormBuilder) { }
 
   ngOnInit(): void  {
@@ -27,8 +29,17 @@ export class SigninComponent implements OnInit {
   get emailInput() { return this.signin.get('email'); }
   get passwordInput() { return this.signin.get('password'); }  
 
+  
   login() {
-    this.auth.login(this.email, this.password);
+    this.auth.login(this.email, this.password).subscribe(
+      (res: any) => {
+        localStorage.setItem('jwt', res.token);
+        this.router.navigateByUrl('/home'); 
+      },
+      (err: any) => {
+        this.error = err.error.token;
+      }
+    );
   }
 }
 
