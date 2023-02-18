@@ -1,42 +1,11 @@
-<!-- <div
-  id="carouselExampleIndicators"
-  #mycarouselControls
-  class="carousel slide"
-  data-bs-ride="carousel"
-  data-bs-interval="2000"
->
-  <div>
-    <ul *ngFor="let cook of cooks; let i = index; first as isFirst">
-      <div [ngClass]="isFirst ? 'carousel-item active' : 'carousel-item'">
-        <div class="carousel-card">
-          <img
-            src="../../../assets/static/images/cooking.png"
-            class="cook-icon"
-            alt="..."
-          />
-          <div>
-            <h5>{{ cook.name }}</h5>
-            <p>{{ cook.description }}</p>
-            <button
-              class="reserve-button"
-              routerLink="cook/{{ cook.id }}/reservation"
-              mat-button
-            >
-              Réserver
-            </button>
-            <button class="reserve-button" routerLink="cooks/all" mat-button>
-              Voir tous
-            </button>
-          </div>
-        </div>
-      </div>
-    </ul>
-  </div>
-</div> -->
 <div class="container-cook" style="margin: 15% 20%;" *ngIf="this.auth.isCook()">
-  <p style="font-size: 60px; text-align: center;">Bienvenue</p>
+  <p style="font-size: 60px; text-align: center;">Bienvenu chef</p>
 </div>
-<div class="carousel-container" *ngIf="!this.auth.isCook()">
+
+<div class="container-cook" style="margin: 15% 20%;" *ngIf="this.auth.isAdmin()">
+  <p style="font-size: 60px; text-align: center;">Bienvenu Administrateur</p>
+</div>
+<div class="carousel-container" *ngIf="this.auth.isUser()">
   <ngb-carousel *ngIf="cooks" [showNavigationArrows]="true"
 [showNavigationIndicators]="true">
   <ng-template ngbSlide *ngFor="let cook of cooks">
