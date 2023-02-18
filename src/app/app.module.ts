@@ -32,6 +32,8 @@ import { CreateMenuComponent } from './component/menus/create-menu/create-menu.c
 import { ListMenusComponent } from './component/menus/list-menus/list-menus.component';
 import { CreateDishComponent } from './component/dishes/create-dish/create-dish.component';
 import { RouterModule } from '@angular/router';
+import { CreateCookComponent } from './component/create-cook/create-cook.component';
+import { StatisticsComponent } from './component/statistics/statistics.component';
 
 
 
@@ -50,7 +52,9 @@ import { RouterModule } from '@angular/router';
     UserReservationComponent,
     CreateMenuComponent,
     ListMenusComponent,
-    CreateDishComponent  
+    CreateDishComponent,
+    CreateCookComponent,
+    StatisticsComponent  
   ],
   imports: [
     BrowserModule,

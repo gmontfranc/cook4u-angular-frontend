@@ -2,6 +2,8 @@
   <mat-toolbar-row>
     <span>Cook4U</span>
     <button mat-button routerLink="home" >Accueil</button>
+    <button mat-button *ngIf="this.auth.isAdmin()" routerLink="create-cook" >Créer un chef</button>
+    <button mat-button *ngIf="this.auth.isAdmin()" routerLink="statistics" >Statistique de l'application</button>
     <button mat-button *ngIf="this.auth.isUser()" routerLink="reservation" >Réserver</button>
     <div *ngIf="this.auth.isCook()then myReservationForCooks else myReservationForUsers"></div>
     <ng-template #myReservationForCooks>
