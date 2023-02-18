@@ -9,7 +9,11 @@ import { Signuprequest } from 'src/app/model/signuprequest';
   providedIn: 'root'
 })
 export class SignupService {
-  private BASE_REGISTER_URL = "/api/auth/signup";
+  private BASE_AUTH_URL = "http://localhost:8080";
+
+  private BASE_REGISTER_URL = this.BASE_AUTH_URL+"/api/auth/signup";
+  private BASE_REGISTE_COOK_URL = this.BASE_AUTH_URL+"/api/user/create";
+
   
 
   constructor(private http: HttpClient, private router: Router, private jwtUtils: JwtHelperService) { }
@@ -24,6 +28,20 @@ export class SignupService {
     this.http.post<AuthResponse>(this.BASE_REGISTER_URL, signupForm, httpOptions).subscribe({
       next: (data) => {
         localStorage.setItem('jwt', data.token);
+          this.router.navigateByUrl('/home');  
+      }
+    })
+  }
+
+  createCook(signupForm: Signuprequest) {
+
+    const httpOptions = {
+      headers: new HttpHeaders({ 'Content-Type': 'application/json', 'Access-Control-Allow-Origin': '*' })
+    };
+
+
+    this.http.post<AuthResponse>(this.BASE_REGISTE_COOK_URL, signupForm, httpOptions).subscribe({
+      next: (data) => {
           this.router.navigateByUrl('/home');  
       }
     })

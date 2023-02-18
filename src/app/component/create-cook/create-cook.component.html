@@ -1,1 +1,40 @@
-<p>create-cook works!</p>
+<head>
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+  </head>
+  <div class="form-container">
+    <header class="header">
+        <h1 class="title">
+            Enregistrer un chef de cuisine
+        </h1>
+    </header>
+  
+    <form [formGroup]="signUpForm" (ngSubmit)="submitForm()" class="form">
+        <mat-form-field>
+          <mat-label>Email:</mat-label>
+          <input matInput  formControlName="email" />
+        </mat-form-field>
+  
+        <mat-form-field>
+          <mat-label>Firstname:</mat-label>
+          <input matInput formControlName="firstname" />
+        </mat-form-field>
+  
+        <mat-form-field>
+          <mat-label>Lastname:</mat-label>
+          <input matInput formControlName="lastname" />
+        </mat-form-field>
+  
+        <mat-form-field>
+          <mat-label>Age:</mat-label>
+          <input matInput type="number" formControlName="age" />
+        </mat-form-field>
+  
+        <mat-form-field>
+          <mat-label>Password:</mat-label>
+          <input matInput type="password" formControlName="password" />
+        </mat-form-field>
+  
+  
+        <button mat-raised-button color="primary" type="submit" [disabled]="signUpForm.invalid">Sign up</button>
+      </form>
+  </div>

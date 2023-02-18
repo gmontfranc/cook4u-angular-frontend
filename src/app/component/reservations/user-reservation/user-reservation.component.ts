@@ -19,7 +19,7 @@ export class UserReservationComponent implements OnInit {
   currentReservation: ReservationToShow;
 
   
-  displayedColumns: string[] = ['name', 'date', 'numberOfPeople', 'prixTotal'];
+  displayedColumns: string[] = ['name', 'date', 'numberOfPeople', 'prixTotal', 'state'];
   dataSource = new MatTableDataSource(this.reservationsToShow);
 
   constructor(
