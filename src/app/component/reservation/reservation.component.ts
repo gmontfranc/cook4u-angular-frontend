@@ -291,13 +291,13 @@ export class ReservationComponent implements OnInit {
     }
 
     let prixStarters = starters
-      .map((x) => x.price)
-      .reduce((acc, curr) => acc + curr, 0);
+      .map((x) => x.quantity === 0 ? 0 : (x.price*x.quantity))
+      .reduce((acc, curr) =>  acc + curr, 0);
     let prixMain = mainDs
-      .map((x) => x.price)
+      .map((x) => x.quantity === 0 ? 0 : (x.price*x.quantity))
       .reduce((acc, curr) => acc + curr, 0);
     let prixDsrts = dsrts
-      .map((x) => x.price)
+      .map((x) => x.quantity === 0 ? 0 : (x.price*x.quantity))
       .reduce((acc, curr) => acc + curr, 0);
     console.log(starters);
     //Construct Object to send to backend
