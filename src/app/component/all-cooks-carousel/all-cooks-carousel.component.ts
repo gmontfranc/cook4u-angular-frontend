@@ -18,11 +18,17 @@ export class AllCooksCarouselComponent implements OnInit {
   
   
   ngOnInit() {
+    
     this.cookService.getAllCooks().subscribe({
-      next: (data) => {     
+      next: (data) => {   
+        if(!this.auth.isAdmin()) {  
         this.cooks = data.slice(1, 5);
+        }else{
+          this.cooks = data;
+        }
       }
     });
+  
   } 
 
   goToReservation(id: number) {
