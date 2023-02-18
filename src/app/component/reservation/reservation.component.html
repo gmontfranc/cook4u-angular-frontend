@@ -49,45 +49,6 @@
             <textarea matInput formControlName="comments"></textarea>
         </mat-form-field>
 
-        <!--<div class="row">
-            <div class="col" >
-                    <mat-label *ngIf="entries.length > 0">Entrées</mat-label>
-                    <div formArrayName="entries" *ngFor="let item of entries;let i = index">
-                        <div [formGroupName]="i">
-                            <mat-form-field>
-                                <mat-label>Entrée : </mat-label>
-                                <input  matInput [formControlName]="entries[i]" type="number" min="0">
-                            </mat-form-field>
-                        </div>
-                        
-                    </div>
-            </div>
-            <div class="col" >
-                <mat-label *ngIf="mains.length > 0">Plats Principales</mat-label>
-                <div formArrayName="mainDishes" *ngFor="let item of mains;let i = index">
-                    <div [formGroupName]="i">
-                        <mat-form-field>
-                            <mat-label>Plat : </mat-label>
-                            <input  matInput [formControlName]="mains[i]" type="number" min="0">
-                        </mat-form-field>
-                    </div>
-                    
-                </div>
-            </div>   
-            <div class="col" >
-                <mat-label *ngIf="deserts.length > 0">Desserts</mat-label>
-                <div formArrayName="deserts" *ngFor="let item of deserts;let i = index">
-                    <div [formGroupName]="i">
-                        <mat-form-field>
-                            <mat-label>Dessert : </mat-label>
-                            <input  matInput [formControlName]="deserts[i]" type="number" min="0">
-                        </mat-form-field>
-                    </div>
-                    
-                </div>
-            </div>   
-        </div>-->
-
         <div class="row">
             <div class="col" >
                     <mat-label *ngIf="starters.length > 0">Entrées</mat-label>
@@ -105,7 +66,7 @@
                       </div>
             </div>
             <div class="col" >
-                <mat-label *ngIf="mainD.length > 0">Plats Principales</mat-label>
+                <mat-label *ngIf="mainD.length > 0">Plats Principaux</mat-label>
                 <div formArrayName="mainDishes" *ngFor="let item of mainD;let i = index">
                     <div [formGroupName]="i">
                         <mat-form-field>
