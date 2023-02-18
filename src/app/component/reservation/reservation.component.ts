@@ -16,18 +16,22 @@ import { CookService } from 'src/app/service/cook-services/cook.service';
   styleUrls: ['./reservation.component.scss'],
 })
 export class ReservationComponent implements OnInit {
+  minDate: Date;
   constructor(
     private formHelper: FormBuilder,
     private cookService: CookService,
     private subRoute: ActivatedRoute,
     private router: Router
-  ) {}
+  ) {
+    this.minDate = new Date();
+    this.minDate.setDate(this.minDate.getDate() + 7);
+  }
 
   disableSubmit = false;
 
   isReservLoading = false;
 
-  minDate = new Date();
+  //minDate = (new Date().getDate() +7); 
   form: FormGroup;
   cooks: User[];
   menus: Menu[];
