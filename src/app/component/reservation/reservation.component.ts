@@ -252,6 +252,8 @@ export class ReservationComponent implements OnInit {
     let rowsMain = this.form.get('mainDishes') as FormArray;
     let rowsDesert = this.form.get('deserts') as FormArray;
 
+
+
     let starters: ReserveDish[] = [];
     let mainDs: ReserveDish[] = [];
     let dsrts: ReserveDish[] = [];
@@ -315,6 +317,15 @@ export class ReservationComponent implements OnInit {
       prixTotal: prixStarters + prixMain + prixDsrts,
     };
 
+   
+    
+    if(reserve.mainDishes[0].quantity == 0 && reserve.mainDishes[1].quantity == 0 && reserve.mainDishes[2].quantity == 0) {
+      this.failureMessage="Erreur durant la creation! Veuillez être sur d'avoir mis le bon nombre d'entrées / plats / desserts";
+      setTimeout(() => (this.failureMessage = ''), 5000);
+      this.isReservLoading = false;
+      return;
+    }
+
     this.cookService.reserver(reserve).subscribe({
       next: (res: any) => {
         this.router.navigate(['user/reservations']);
@@ -324,7 +335,7 @@ export class ReservationComponent implements OnInit {
       }, error: (err: any) => {
         console.log(err);
         this.isReservLoading = false;
-        this.failureMessage="Erreur durant la creation!";
+        this.failureMessage="Erreur durant la creation! Veuillez être sur d'avoir mis le bon nombre d'entrées / plats / desserts";
         setTimeout(() => (this.failureMessage = ''), 5000);
       }
     });
